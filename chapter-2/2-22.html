@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" crossorigin="anonymous">
+  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script crossorigin  src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <h1 class="bg-primary text-white display-4">React</h1>
+  <div class="container mt-3">
+    <div id="root">wait...</div>
+  </div>
+  <script type="text/babel">
+    let dom = document.querySelector('#root')
+
+    let title = 'React page'
+    let message = 'メッセージ'
+
+    let date = [
+      {name:'Taro',mail:'taro@yamada',age:39},
+      {name:'Hanako',mail:'hanako@flower',age:28},
+      {name:'Sachiko',mail:'sachiko@happy',age:17},
+      {name:'Ichiro',mail:'ichiro@baseball',age:15},
+      {name:'Jiro',mail:'jiro@change',age:18}
+    ]
+
+    let el = (
+      <div>
+        <h4>{title}</h4>
+        <h6>{message}</h6>
+        <table className="table table-striped mt-4">
+          <thead className="thead-dark">
+            <tr>
+              <th>Name</th>
+              <th>Mail</th>
+              <th>Age</th>
+            </tr>
+          </thead>
+            <tbody>
+                {date.map((value)=>(
+                <tr>
+                    <td>{value.name}</td>
+                    <td>{value.mail}</td>
+                    <td>{value.age}</td>
+                </tr>
+                ))}
+            </tbody>
+        </table>
+      </div>
+    )
+
+  ReactDOM.render(el,dom)
+  </script>
+</body>
+</html>
