@@ -179,37 +179,235 @@ import './App.css';
 
 
 // 4-9 side effect hooks
+// function AlertMessage(props) {
+//     return <div className="alert alert-primary h5 text-primary">
+//         <h5>{props.msg}</h5>
+//     </div>
+// }
+//
+// function App() {
+//     const [val, setVal] = useState(0)
+//     const [msg, setMsg] = useState("set a number..")
+//     const doChange = (event) => {
+//         setVal(event.target.value)
+//     }
+//
+//     useEffect(() => {
+//         let total = 0
+//         for (let i=0; i<=val;i++) {
+//             total += i
+//         }
+//         setMsg('total: '+ total + '.' )
+//     })
+//
+//     return (
+//         <div>
+//             <h1 className="bg-primary text-white display-4">React</h1>
+//             <div className="container">
+//                 <h4 className="my-3">Hooks sample</h4>
+//                 <AlertMessage msg={msg} />
+//                 <div className="form-group">
+//                     <label>Input:</label>
+//                     <input type="number" className="form-control" onChange={doChange} />
+//                 </div>
+//             </div>
+//         </div>
+//     )
+// }
+//
+// export default App
+
+// 4-10 use multiple useEffect
+// function AlertMessage(props) {
+//     return <div className="alert alert-primary h5 text-primary">
+//         <h5>{props.msg}</h5>
+//     </div>
+// }
+//
+// function App()  {
+//     const [val, setVal]=useState(1000)
+//     const [tax1, setTax1]=useState(0)
+//     const [tax2, setTax2]=useState(0)
+//     const [msg, setMsg]=useState(<p>set a price ...</p>)
+//
+//     const doChange=(event) => {
+//         setVal(event.target.value)
+//     }
+//
+//     const doAction = () => {
+//         let res = <div>
+//             <p>軽減税率(8%): {tax1} 円</p>
+//             <p>通常税率(10%): {tax2} 円</p>
+//         </div>
+//         setMsg(res)
+//     }
+//
+//     useEffect(
+//         () => {
+//             setTax1(Math.floor(val*1.08))
+//         }
+//     )
+//
+//     useEffect(
+//         () => {
+//             setTax2(Math.floor(val*1.1))
+//         }
+//     )
+//
+//     return (
+//         <div>
+//             <h1 className="bg-primary text-white display-4">React</h1>
+//             <div className="container">
+//                 <h4 className="my-3">Hooks sample</h4>
+//                 <AlertMessage msg={msg} />
+//                 <div className="form-group">
+//                     <label>Input:</label>
+//                     <input type="number" className="form-control" onChange={doChange} />
+//                 </div>
+//                 <button className="btn btn-primary" onClick={doAction}>Calc</button>
+//             </div>
+//         </div>
+//     )
+//
+// }
+//
+// export default App
+
+// 4-11 skip side effect
+// function AlertMessage(props) {
+//     return <div className="alert alert-primary h5 text-primary">
+//         <h5>{props.msg}</h5>
+//     </div>
+// }
+//
+// function App()  {
+//     const [val, setVal]=useState(1000)
+//     const [tax1, setTax1]=useState(0)
+//     const [tax2, setTax2]=useState(0)
+//     const [msg, setMsg]=useState(<p>set a price ...</p>)
+//
+//     const doChange=(event) => {
+//         setVal(event.target.value)
+//     }
+//
+//     useEffect( () => {
+//         let res = <div>
+//             <p>軽減税率(8%): {tax1} 円</p>
+//             <p>通常税率(10%): {tax2} 円</p>
+//         </div>
+//         setMsg(res)
+//     })
+//
+//     useEffect(
+//         () => {
+//             setTax1(Math.floor(val*1.08))
+//         }
+//     )
+//
+//     useEffect(
+//         () => {
+//             setTax2(Math.floor(val*1.1))
+//         }
+//     )
+//
+//     return (
+//         <div>
+//             <h1 className="bg-primary text-white display-4">React</h1>
+//             <div className="container">
+//                 <h4 className="my-3">Hooks sample</h4>
+//                 <AlertMessage msg={msg} />
+//                 <div className="form-group">
+//                     <label>Input:</label>
+//                     <input type="number" className="form-control" onChange={doChange} />
+//                 </div>
+//             </div>
+//         </div>
+//     )
+// }
+//
+// export default App
+
+// 4-12 skip side effect and avoid infinity load
+// function AlertMessage(props) {
+//     return <div className="alert alert-primary h5 text-primary">
+//         <h5>{props.msg}</h5>
+//     </div>
+// }
+//
+// function App()  {
+//     const [val, setVal]=useState(1000)
+//     const [tax1, setTax1]=useState(0)
+//     const [tax2, setTax2]=useState(0)
+//     const [msg, setMsg]=useState(<p>set a price ...</p>)
+//
+//     const doChange=(event) => {
+//         setVal(event.target.value)
+//     }
+//
+//     useEffect( () => {
+//         let res = <div>
+//             <p>軽減税率(8%): {tax1} 円</p>
+//             <p>通常税率(10%): {tax2} 円</p>
+//         </div>
+//         setMsg(res)
+//     }, [tax1, tax2])
+//
+//     useEffect(
+//         () => {
+//             setTax1(Math.floor(val*1.08))
+//         }
+//     )
+//
+//     useEffect(
+//         () => {
+//             setTax2(Math.floor(val*1.1))
+//         }
+//     )
+//
+//     return (
+//         <div>
+//             <h1 className="bg-primary text-white display-4">React</h1>
+//             <div className="container">
+//                 <h4 className="my-3">Hooks sample</h4>
+//                 <AlertMessage msg={msg} />
+//                 <div className="form-group">
+//                     <label>Input:</label>
+//                     <input type="number" className="form-control" onChange={doChange} />
+//                 </div>
+//             </div>
+//         </div>
+//     )
+// }
+//
+// export default App
+
+// 4-14 define original useState
+function useCounter() {
+    const [num, setNum] = useState(0)
+
+    const count = () =>  {
+        setNum(num + 1)
+    }
+    return [num, count]
+}
+
 function AlertMessage(props) {
-    return <div className="alert alert-primary h5 text-primary">
-        <h5>{props.msg}</h5>
+    const [counter, plus] = useCounter()
+    return <div className="alert alert-primary h5 text-center">
+        <h4>count: {counter}</h4>
+        <button onClick={plus} className="btn btn-primary">
+            count
+        </button>
     </div>
 }
 
 function App() {
-    const [val, setVal] = useState(0)
-    const [msg, setMsg] = useState("set a number..")
-    const doChange = (event) => {
-        setVal(event.target.value)
-    }
-
-    useEffect(() => {
-        let total = 0
-        for (let i=0; i<=val;i++) {
-            total += i
-        }
-        setMsg('total: '+ total + '.' )
-    })
-
-    return (
+    return(
         <div>
             <h1 className="bg-primary text-white display-4">React</h1>
             <div className="container">
                 <h4 className="my-3">Hooks sample</h4>
-                <AlertMessage msg={msg} />
-                <div className="form-group">
-                    <label>Input:</label>
-                    <input type="number" className="form-control" onChange={doChange} />
-                </div>
+                <AlertMessage />
             </div>
         </div>
     )
