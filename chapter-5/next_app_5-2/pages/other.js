@@ -13,10 +13,10 @@ export default function Home() {
                 <div className="card p-3 text-center">
                     <p>これは、もう一つのページの表示です。</p>
                     <Link href="/">
-                        <a>&lt;&lt; Back to Index page</a>
+                        &lt;&lt; Back to Index page
                     </Link>
                 </div>
             </div>
         </div>
-    )
+    );
 }
