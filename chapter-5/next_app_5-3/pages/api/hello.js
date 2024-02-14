@@ -1,5 +1,11 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
+import apiData from '../../components/data'
+
 export default function handler(req, res) {
-  res.status(200).json({ name: "John Doe" });
+  let id = req.query.id
+  if (id === undefined) {id = 0}
+  if (id >= apiData.length) {id = 0}
+
+  res.json(apiData[id]);
 }
