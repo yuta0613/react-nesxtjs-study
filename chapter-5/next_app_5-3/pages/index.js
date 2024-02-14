@@ -73,22 +73,52 @@
 // }
 
 // 5-20 pick up data.txt
+// import Layout from "../components/layout";
+// import useSWR from 'swr';
+//
+// export default function Home() {
+//   const func = (...args) => fetch(...args).then(res => res.text())
+//   const { data, err} = useSWR('./data.txt', func)
+//
+//   return (
+//       <div>
+//         <Layout header="Next.js" title="Top page.">
+//           <div className="alert alert-primary text-center">
+//             <h5 className="mb-4">
+//               {data}
+//             </h5>
+//           </div>
+//         </Layout>
+//       </div>
+//   )
+// }
+
+// 5-24 use hello api
 import Layout from "../components/layout";
 import useSWR from 'swr';
+import {useState} from "react";
+
+// need to add fetcher for using useAWR correctly
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Home() {
-  const func = (...args) => fetch(...args).then(res => res.text())
-  const { data, err} = useSWR('./data.txt', func)
+    const [address, setAddress] = useState('/api/hello')
+    const {data, err} = useSWR(address, fetcher)
 
-  return (
-      <div>
-        <Layout header="Next.js" title="Top page.">
-          <div className="alert alert-primary text-center">
-            <h5 className="mb-4">
-              {data}
-            </h5>
-          </div>
-        </Layout>
-      </div>
-  )
+    const onChange = (e) => {
+        setAddress('api/hello?id=' + e.target.value)
+    }
+
+    return (
+        <div>
+            <Layout header="Next.js" title="Top page.">
+                <div className="alert alert-primary text-center">
+                    <h5 className="mb-4">
+                        {JSON.stringify(data)}
+                    </h5>
+                    <input type="number" className="form-control" onChange={onChange}/>
+                </div>
+            </Layout>
+        </div>
+    )
 }
